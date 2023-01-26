@@ -1,1 +1,1 @@
-# Univerisade de Aveiro - Modelação e análise de sistemas
+# Universidade de Aveiro - Modelação e análise de sistemas
