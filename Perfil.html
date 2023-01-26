@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>PawFection</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+        <link href='https://fonts.googleapis.com/css?family=Bungee' rel='stylesheet'>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script src ="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src ="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src ="https://knockoutjs.com/downloads/knockout-3.5.1.debug.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+            body {
+                font-family: 'Bungee';font-size: 21px;
+            }
+    </style>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="Pagina_inical.html"><i class="fa-solid fa-paw"></i></a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                  <a class="nav-link" aria-current="page" href="Perfil.html">Perfil</a>
+                  <a class="nav-link" href="Animal.html">O Meu Animal</a>
+                  <a class="nav-link" href="Mas_compra.html">Encomendar</a>  
+            <button type="button" class="btn btn-outline-danger btn-sm form-inline my-1 position-absolute d-flex" style="right:15px" onclick="window.sessionStorage.clear('Login');window.location = 'Pagina_inical.html'">Terminar sessão</button>
+          </div>
+              </div>
+            </nav>
+    <div class="row" style="margin-top: 60px;">
+    <div class="col-9">
+        <div class="row mt-5">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-10">
+              <div class="card rounded-5">
+                <h3 style="text-align: center; border-bottom: 1px solid rgb(188, 188, 188); padding: 25px;" class="card-title"><span style="color:rgb(223, 223, 223);">---------------------</span><span style="padding-left: 20px;padding-right: 20px;">Os meus dados</span><span style="color:rgb(223, 223, 223);">---------------------</span></h3>
+                <div class="card-body" data-bind="with:Perfil">
+                 
+                    
+                  <div class="card-text">
+                    <div class="row"><h4 class="col-4">Nome:</h4><span class="col-5" data-bind="text:Nome"></span></div>
+                    <div class="row"><h4 class="col-4">Morada:</h4><span class="col-5" data-bind="text:Morada"></span></div>
+                    <div class="row"><h4 class="col-4">Nº de Animais:</h4><span class="col-5" data-bind="text:Animais.length"></span></div>
+                    <div class="row"><h4 class="col-4">Pagamento:</h4><span class="col-5" data-bind="text:M_PagamentoA"></span></div>
+                    <div class="row"><h4 class="col-4">NIF:</h4><span class="col-5" data-bind="text:Nif"></span></div>
+                    <div class="row"><h4 class="col-4">Plano:</h4><span class="col-5" data-bind="text:PlanoA"></span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+    </div>
+
+  <div class="col-2" style="margin: auto;">   
+    <div class="col-10">
+      <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop2" role="button" style="margin-bottom:20px">As minhas consultas</button>
+      <button style="margin-bottom:20px" type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Marcar nova consulta
+      </button>
+      <a class="btn btn-warning" href="Planos.html" role="button">Escolher plano</a>
+    </div>
+   </div>
+  <div class="col-1"></div>
+  </div>
+  
+            
+
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Marcar consulta</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>
+          Animal:
+          <select data-bind="options: animais,
+                             optionsText: 'Name',
+                             value: valor,
+                             optionsCaption: 'Choose...'"></select>
+      </p>
+        Data:<input data-bind="textInput:dataC" type="datetime-local" name="data11" id="data11">
+        <div class="invalida d-none" style="color: red;">Data inválida</div>
+        <div class="invalida d-none" style="color: red;">Horário disponível:</div>
+        <div class="invalida d-none" style="color: red;">Dias úteis entre 8:00-18:59</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button data-bind="click:marcaConsulta" type="button" class="btn btn-primary">Marcar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+     <!-- Modal -->
+     <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdrop2Label" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdrop2Label">Consultas</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <div >
+              
+              <table class="table table-striped table-condensed">
+                  <thead>
+                  <tr><th>Animal</th><th>Data</th></tr>
+                  </thead>
+                  <tbody data-bind="foreach:consultas">
+                  <tr>
+                  <td data-bind="text: Animal"></td>
+                  <td ><span data-bind="text: Data.replace('T',' ')"></span></td>
+                  </tr>
+                  </tbody>
+              </table>
+         <hr>
+      </div>
+        
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Sair</button>
+            
+        
+      </div>
+    </div></div>
+       <script>
+      function  modal(){
+            self.Perfil=ko.observable()
+            self.PlanoA=ko.observable()
+            self.M_PagamentoA=ko.observable()
+            self.animais=ko.observableArray([])
+            self.valor=ko.observable();
+            self.dataC=ko.observable();
+            self.consultas=ko.observableArray([]);
+            
+            self.adiciona_consulta= function(pedido){
+    var cliente;
+ var idd;
+var mail=window.sessionStorage.getItem('Login');
+            console.log(mail)
+            var array = JSON.parse(window.localStorage.getItem('Lista_clients'));
+            console.log(array);
+            for (let index = 0; index < array.length; index++) {
+                const element = array[index];
+                if(element.Mail==mail){
+                  cliente=element;
+                 idd=  array.indexOf(element);
+                    break
+                }
+            }
+            
+            //cliente.Consultas=[]
+            var consulta2=cliente.Consultas;
+            cliente.Consultas=consulta2.concat([pedido])
+            //cliente.consulta2=[]
+            var listaDeClientes = JSON.parse(window.localStorage.getItem('Lista_clients'));
+            listaDeClientes[idd]=cliente;
+            console.log(1);
+            console.log(cliente)
+            console.log(2);
+            
+            console.log(idd)
+            console.log(3);
+            console.log(listaDeClientes)
+            window.localStorage.setItem('Lista_clients', JSON.stringify(listaDeClientes));
+
+console.log(4);
+console.log(JSON.parse(window.localStorage.getItem('Lista_clients')))
+}
+
+            self.marcaConsulta=function(){
+              
+              const hoje = new Date();
+              const diaMarcado = new Date($("#data11").val());
+              console.log(diaMarcado.getDay())
+              console.log(7<diaMarcado.getHours())
+              if(hoje<diaMarcado&&0<diaMarcado.getDay()&&diaMarcado.getDay()<6&&7<diaMarcado.getHours()&&diaMarcado.getHours()<19){
+                    let dic={}
+                dic["Animal"]=self.valor().Name
+                dic["Data"]=self.dataC()
+    console.log(11);
+    console.log(dic);    
+    
+    self.adiciona_consulta(dic);
+                alert("Consulta Marcada");
+                window.location="Perfil.html";
+              }else{
+                $(".invalida").removeClass("d-none");
+              }
+            }
+            mail=window.sessionStorage.getItem('Login');
+            console.log(mail)
+            var array = JSON.parse(window.localStorage.getItem('Lista_clients'));
+            console.log(array);
+            for (let index = 0; index < array.length; index++) {
+                const element = array[index];
+                if(element.Mail==mail){
+                    self.Perfil(element);
+                    break
+                }
+            }
+            self.consultas(self.Perfil().Consultas);
+
+
+            for (let index = 0; index < self.Perfil().Animais.length; index++) {
+              const element = self.Perfil().Animais[index];
+              console.log(1);
+              console.log(element);
+              self.animais.push({Name:element.Nome,Vale:element.Nome});
+            }
+            console.log(self.animais())
+            switch (self.Perfil().M_Pagamento) {
+                case "1":
+                self.M_PagamentoA("MBway");
+                    break;
+                    case "2":
+                self.M_PagamentoA("PayPal");
+                    break;
+                    case "3":
+                self.M_PagamentoA("Visa");
+                    break;
+            
+                default:
+                    self.M_PagamentoA("Erro");
+                    break;
+            }
+            switch (self.Perfil().Plano) {
+                case "1":
+                self.PlanoA("Bronze");
+                    break;
+                    case "2":
+                self.PlanoA("Silver");
+                    break;
+                    case "3":
+                self.PlanoA("Gold");
+                    break;
+            
+                default:
+                    self.PlanoA("Sem Plano");
+                    break;
+            }
+            console.log(self.Perfil());
+            console.log(self.PlanoA())
+        };
+        ko.applyBindings(new modal());
+
+       </script>
+</body>
+</html>
